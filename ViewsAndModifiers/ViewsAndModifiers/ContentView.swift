@@ -9,15 +9,15 @@
 import SwiftUI
 
 struct ContentView: View {
-    var body: some View {
-       VStack {
-           Text("Gryffindor")
-               .blur(radius: 1)
-           Text("Hufflepuff")
-           Text("Ravenclaw")
-           Text("Slytherin")
+     @State private var useRedText = false
+
+       var body: some View {
+           Button("Hello World") {
+               // flip the Boolean between true and false
+               self.useRedText.toggle()
+           }
+           .foregroundColor(useRedText ? .red : .blue)
        }
-       .blur(radius: 0)    }
 }
 
 struct ContentView_Previews: PreviewProvider {
