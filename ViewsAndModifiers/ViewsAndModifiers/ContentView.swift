@@ -8,16 +8,27 @@
 
 import SwiftUI
 
-struct ContentView: View {
-     @State private var useRedText = false
+struct CapsuleText: View {
+    var text: String
 
-       var body: some View {
-           Button("Hello World") {
-               // flip the Boolean between true and false
-               self.useRedText.toggle()
-           }
-           .foregroundColor(useRedText ? .red : .blue)
-       }
+    var body: some View {
+        Text(text)
+            .font(.largeTitle)
+            .padding()
+            .foregroundColor(.white)
+            .background(Color.blue)
+            .clipShape(Capsule())
+    }
+}
+
+
+struct ContentView: View {
+    var body: some View {
+        VStack(spacing: 10) {
+            CapsuleText(text: "First")
+            CapsuleText(text: "Second")
+        }
+    }
 }
 
 struct ContentView_Previews: PreviewProvider {
