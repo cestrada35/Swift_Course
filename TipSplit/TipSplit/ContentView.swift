@@ -8,10 +8,37 @@
 
 import SwiftUI
 
+struct Redify: ViewModifier {
+    var text: String
+    func body (content: Content) -> some View{
+        HStack{
+            content
+            Spacer()
+            Text(text)
+                .foregroundColor(.red)
+        }
+    }
+}
+
+extension View {
+    func Redified(with word: String) -> some View{
+        self.modifier(Redify(text: word))
+    }
+}
+
 struct ContentView: View {
     @State private var checkAmt = "" //@state allows us to use two-way binding
     @State private var  numPeople = 2
     @State private var tipPercent = 2
+    
+    var tip : Bool {
+        var tipStatus = true
+        
+        if (tipPercent == 0){
+            tipStatus = false
+        }
+        return tipStatus
+    }
     
     let tipPercentages = [0, 5, 10, 15, 20]
     
@@ -47,8 +74,11 @@ struct ContentView: View {
                     }
                     .pickerStyle(SegmentedPickerStyle())
                 }
-                Section{
+                Section (header: Text("Each person should then  pay")){
                     Text("$\(totalPerPerson, specifier: "%.2f")")
+                        .Redified(with: tip ? "" : "Heads Up: Tip selection is at 0%")
+                        .foregroundColor(tip ? .black : .red )
+                    
                 }
             }.navigationBarTitle("Tip Split")
         }
