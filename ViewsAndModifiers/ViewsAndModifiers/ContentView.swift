@@ -36,9 +36,26 @@ struct Watermark: ViewModifier {
     }
 }
 
+struct Titlize: ViewModifier {
+    var text2: String
+    func body (content: Content) -> some View{
+        ZStack{
+            content
+            Text(text2)
+                .font(.title)
+                .foregroundColor(.blue)
+                .padding(5)
+                .background(Color.yellow)
+        }
+    }
+}
+
 extension View {
     func watermarked(with text: String) -> some View {
         self.modifier(Watermark(text: text))
+    }
+    func Titlized(with word: String) -> some View{
+        self.modifier(Titlize(text2: word))
     }
 }
 
@@ -51,6 +68,9 @@ struct ContentView: View {
             Color.blue
             .frame(width: 300, height: 200)
             .watermarked(with: "Hacking with Swift")
+            
+            Text("")
+            .Titlized(with: "Sample Title")
         }
     }
 }
