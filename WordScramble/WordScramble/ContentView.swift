@@ -10,23 +10,16 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-       List {
-            Section(header: Text("Section 1")) {
-                Text("Static row 1")
-                Text("Static row 2")
-            }
-
-            Section(header: Text("Section 2")) {
-                ForEach(0..<5) {
-                    Text("Dynamic row \($0)")
-                }
-            }
-
-            Section(header: Text("Section 3")) {
-                Text("Static row 3")
-                Text("Static row 4")
-            }
-        }
+        let input  = """
+            a
+            b
+            c
+            """
+        let letters = input.components(separatedBy: "\n")
+        let letter = letters.randomElement()
+        let trimmed = letter?.trimmingCharacters(in: .whitespacesAndNewlines )
+        
+        Text("Hello World")
     }
 }
 
