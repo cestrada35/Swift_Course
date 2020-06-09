@@ -9,17 +9,23 @@
 import SwiftUI
 
 struct ContentView: View {
-    var body: some View {
-        let input  = """
-            a
-            b
-            c
-            """
-        let letters = input.components(separatedBy: "\n")
-        let letter = letters.randomElement()
-        let trimmed = letter?.trimmingCharacters(in: .whitespacesAndNewlines )
-        
-        Text("Hello World")
+    @State private var usedWords = [String]()
+    @State private var rootWord = ""
+    @State private var newWord = ""
+    
+   var body: some View {
+        NavigationView {
+            VStack {
+                TextField("Enter your word", text: $newWord)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .padding()
+
+                List(usedWords, id: \.self) {
+                    Text($0)
+                }
+            }
+            .navigationBarTitle(rootWord)
+        }
     }
 }
 
